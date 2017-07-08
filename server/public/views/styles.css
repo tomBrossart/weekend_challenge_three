@@ -32,19 +32,20 @@ html, body
   /*right:0;
   bottom:0;*/
   margin:auto;
-  z-index: 50;
+  z-index: 40;
   width: 212px;
   /*height: 500px;*/
   height: 46px;
   text-align: center;
+  border-radius: 5px;
 }
 
 #addBtn  {
   position:absolute;
-  top:375px;
+  top:373px;
   left:303px;
   margin:auto;
-  z-index: 50;
+  z-index: 55;
   width: 220px;
   height: 35px;
   background-color: orange;

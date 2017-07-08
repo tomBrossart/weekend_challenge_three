@@ -26,9 +26,11 @@ SATURDAY AFTERNOON
   [X] update marked complete css styling -- remove button, gray background and slight opacity
   [X] why isn't delete working right away?
 [ ] create an 'are you sure: yes / no' option when deleting a task.
-[ ] if empty input throw alert
-[ ] Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
-  ** going to sort by class (completed or not) and then append to specific divs based on class
+[ ] ADD JQUERY UI SCRIPT
+[ ] figure out scrollbox for tasks
+[X] if empty input throw alert
+[X] Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
+  ** going to sort by class
   ** client side logic...
 
 
