@@ -9,17 +9,19 @@ function appendToDom(tasks) {
   $('#taskList').empty();
   for(var i = 0; i < tasks.length; i+= 1) {
     var task = tasks[i];
-    var $tr = $('<tr data-taskid="' + task.id + '"></tr>');
+    var $tr = $('<tr style="height:10px;" data-taskid="' + task.id + '"></tr>');
     $tr.data('task', task);
-    $tr.append('<td class="' + task.status + '">' + task.tasks + '</td>');
+    $tr.append('<td class="task ' + task.status + '">' + task.tasks + '</td>');
+    // if task is complete show its done
     if(task.status == "complete") {
-      $tr.append('<p>Donezo!</p>');
-    }
+      $tr.append('<button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button>');
+      $('#taskList').append($tr);    }
+    // otherwise add Mark Done button
     else {
-    $tr.append('<td><button class="mark ' + task.status + '">Mark Complete</button></td>');
-    }
-    $tr.append('<td><button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
+    $tr.append('<td><button class="mark ' + task.status + '">Mark Complete</button>' +
+                '<button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
     $('#taskList').append($tr);
+    }
   //  if task.status = complete {append check mark}
   // else {append button}           ($('button[class]'))
   }
@@ -42,10 +44,10 @@ function addClickHandlers() {
   // Function called when delete button is clicked
   $('#taskList').on('click', '.deleteBtn', function(){
     // We attached the bookid as data on our button
-    var taskId = $(this).parent().parent().data('taskid');
+    var taskId = $(this).parent().data('taskid');
     console.log($(this));
     console.log('Delete task with id of', taskId);
-    deleteTask(taskId); 
+    deleteTask(taskId);
   });
 
   // Function called when edit button is clicked
