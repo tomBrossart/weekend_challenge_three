@@ -9,24 +9,31 @@ FRIDAY
 
 SATURDAY MORNING
 [X] createTask() -- insert to db and call refreshTasks
-[ ] markComplete() -- change Class and update db
-[ ] deleteTask() -- delete from db and call refreshTasks
-
-[ ] plan CSS
+[X] markComplete() -- change Class and update db
+[X] deleteTask() -- delete from db and call refreshTasks
+[X] plan CSS
 
 
 SATURDAY AFTERNOON
 [ ] implement CSS
+  [X] find iphone outline to append items inside of
+  [X] get outline centered on screen
+  [ ] find illustration for checkmark and trashcan
+  [ ] absolute position app header
+  [ ] absolute position "Add Task" btn and input field at bottom
+  [ ] format table to display rows full width with same color background
+  [ ] update marked complete css styling -- remove button, gray background and slight opacity
 [ ] create an 'are you sure: yes / no' option when deleting a task.
 [ ] Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
   ** going to sort by class (completed or not) and then append to specific divs based on class
+  ** client side logic...
 
 
 
 LESSONS
   * renaming table and columns in db
   * learning about CRUD and how to seperate functions
-
+  * Not effective to update CSS in markComplete click listener because that triggers Put request --> Get request --> refresh appendToDom
 
   QUESTIONS
     * What is "ERROR:  duplicate key value violates unique constraint "id" in postico? And then if I execute the command several times it will insert

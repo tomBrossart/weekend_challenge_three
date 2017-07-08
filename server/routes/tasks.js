@@ -110,38 +110,36 @@ router.put('/', function(req, res){
     } // end if
   }); // end pool
 });
-//
-// // http://localhost:5000/books/5
-// // ^ Delete book with the id of 5
-// // DELETE is similar to GET when using PG
-// router.delete('/:id', function(req, res){
-//   var id = req.params.id; // id of the thing to delete
-//   console.log('Delete route called with id of', id);
-//   pool.connect(function(errorConnectingToDatabase, db, done){
-//     if(errorConnectingToDatabase) {
-//       console.log('Error connecting to the database.');
-//       res.sendStatus(500);
-//     } else {
-//       // We connected to the database!!!
-//       // Now we're going to GET things from the db
-//       console.log("book id is:", id);
-//       var queryText = 'DELETE FROM "books" WHERE id = $1;';
-//       // errorMakingQuery is a bool, result is an object
-//       db.query(queryText, [id], function(errorMakingQuery, result){
-//         done();
-//         if(errorMakingQuery) {
-//           console.log('Attempted to query with', queryText);
-//           console.log('Error making query');
-//           res.sendStatus(500);
-//         } else {
-//           // console.log(result);
-//           // Send back the results
-//             res.sendStatus(200);
-//         }
-//       }); // end query
-//     } // end if
-//   }); // end pool
-//
-// });
+
+// http://localhost:5000/books/5
+// ^ Delete book with the id of 5
+// DELETE is similar to GET when using PG
+router.delete('/:id', function(req, res){
+  var id = req.params.id; // id of the thing to delete
+  console.log('Delete route called with id of', id);
+  pool.connect(function(errorConnectingToDatabase, db, done){
+    if(errorConnectingToDatabase) {
+      console.log('Error connecting to the database.');
+      res.sendStatus(500);
+    } else {
+      console.log("task id is:", id);
+      var queryText = 'DELETE FROM "todo" WHERE id = $1;';
+      // errorMakingQuery is a bool, result is an object
+      db.query(queryText, [id], function(errorMakingQuery, result){
+        done();
+        if(errorMakingQuery) {
+          console.log('Attempted to query with', queryText);
+          console.log('Error making query');
+          res.sendStatus(500);
+        } else {
+          // console.log(result);
+          // Send back the results
+            res.sendStatus(200);
+        }
+      }); // end query
+    } // end if
+  }); // end pool
+
+});
 
 module.exports = router;

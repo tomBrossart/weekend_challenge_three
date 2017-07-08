@@ -45,7 +45,7 @@ function addClickHandlers() {
     var taskId = $(this).parent().parent().data('taskid');
     console.log($(this));
     console.log('Delete task with id of', taskId);
-    // deleteTask(taskId); CREATE THIS SATURDAY
+    deleteTask(taskId); 
   });
 
   // Function called when edit button is clicked
@@ -55,12 +55,7 @@ function addClickHandlers() {
     // store task ID and status as properties in that object
     updatedTask.id = $(this).parent().parent().data('taskid');
     updatedTask.status = "complete";
-    // // update CSS to make task appear marked
-    // $(this).parent().parent().addClass('marked');
     console.log("updatedTask", updatedTask);
-    // remove the Mark Done btn
-    // NOT EFFECTIVE TO HIDE BUTTON HERE BECAUSE markComplete will run refreshTasks which will run appendToDom
-    // $(this).hide();
     // call markComplete for PUT request
     markComplete(updatedTask);
   });
@@ -106,20 +101,18 @@ function markComplete(task) {
   });
 }
 
-// // DELETE
-// function deleteBook(bookId) {
-//   // When using URL params, your url would be...
-//   // '/tasks/' + bookId
-//   // YOUR AJAX CODE HERE
-//   $.ajax({
-//     type: 'DELETE',
-//     url: '/tasks/' + bookId,
-//     success: function(response) {
-//       console.log("Delete response", response);
-//       refreshTasks();
-//     }
-//   });
-//
-// }
-//
-// // Append array of books to the DOM
+// DELETE
+function deleteTask(taskId) {
+  // When using URL params, your url would be...
+  // '/tasks/' + bookId
+  // YOUR AJAX CODE HERE
+  $.ajax({
+    type: 'DELETE',
+    url: '/tasks/' + taskId,
+    success: function(response) {
+      console.log("Delete response", response);
+      refreshTasks();
+    }
+  });
+
+}

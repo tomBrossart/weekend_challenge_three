@@ -1,3 +1,61 @@
+/*PAGE STYLING*/
+html, body
+{
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+#wrapper {
+    position:relative;
+    height: 100%;
+    width:100%;
+}
+
+#container img {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    height: 500px;
+}
+
+#task {
+  position:absolute;
+  top:362px;
+  left:303px;
+  /*right:0;
+  bottom:0;*/
+  margin:auto;
+  z-index: 50;
+  width: 212px;
+  /*height: 500px;*/
+  height: 26px;
+  text-align: center;
+}
+
+#addBtn  {
+  position:absolute;
+  top:395px;
+  left:303px;
+  /*right:0;
+  bottom:0;*/
+  margin:auto;
+  z-index: 50;
+  width: 220px;
+  /*height: 500px;*/
+}
+
+/*IPHONE STYLING*/
+/*#iphone {
+  margin: 10px auto;
+}*/
+
+
+
+// TASKS STYLING
 .complete {
   color: blue;
   background-color: orange;

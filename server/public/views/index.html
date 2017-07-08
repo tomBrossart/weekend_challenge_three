@@ -6,24 +6,29 @@
     <script type="text/javascript" src="vendors/jquery.js"></script>
     <script type="text/javascript" src="scripts/client.js"></script>
     <link rel="stylesheet" href="views/styles.css">
+    <link rel="stylesheet" type="text/css" href="device-mockups/device-mockups.min.css" />
+
   </head>
   <body>
-    <h1>GET $#!T DONE</h1>
-    <input type="text" name="" value="" id="task" placeholder="Add a new task">
-    <button type="button" id="addBtn">Add</button>
-    <div>
+    <div id="wrapper">
+      <div id="container">
+
       <h3>Task List</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Complete</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody id="taskList">
-        </tbody>
-      </table>
+      <img id="iphone" src="views/iphone_6_plus_black_port.png" alt="">
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Complete</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="taskList">
+          </tbody>
+        </table>
+        <input type="text" name="" value="" id="task" placeholder="Add a new task">
+        <button type="button" id="addBtn">Add</button>
+      </div>
     </div>
   </body>
 </html>
