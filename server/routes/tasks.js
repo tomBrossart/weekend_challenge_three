@@ -77,39 +77,39 @@ router.post('/', function(req, res) {
     } // end if
   }); // end pool
 });
-//
-// // PUT is similar to POST when using PG
-// router.put('/', function(req, res){
-//   var book = req.body; // Book with updated content
-//   console.log('Put route called with book of ', book);
-//
-//   // YOUR CODE HERE
-//   pool.connect(function(errorConnectingToDatabase, db, done){
-//     if(errorConnectingToDatabase) {
-//       console.log('Error connecting to the database.');
-//       res.sendStatus(500);
-//     } else {
-//       // We connected to the database!!!
-//       // Now we're going to GET things from the db
-//       console.log("book id is:", book.id);
-//       var queryText = 'UPDATE "books" SET "author" = $1, "title" = $2' +
-//                       ' WHERE id = $3;';
-//       // errorMakingQuery is a bool, result is an object
-//       db.query(queryText, [book.author, book.title, book.id], function(errorMakingQuery, result){
-//         done();
-//         if(errorMakingQuery) {
-//           console.log('Attempted to query with', queryText);
-//           console.log('Error making query');
-//           res.sendStatus(500);
-//         } else {
-//           // console.log(result);
-//           // Send back the results
-//             res.sendStatus(200);
-//         }
-//       }); // end query
-//     } // end if
-//   }); // end pool
-// });
+
+// PUT is similar to POST when using PG
+router.put('/', function(req, res){
+  var task = req.body; // Book with updated content
+  console.log('Put route called with task ', task);
+
+  // YOUR CODE HERE
+  pool.connect(function(errorConnectingToDatabase, db, done){
+    if(errorConnectingToDatabase) {
+      console.log('Error connecting to the database.');
+      res.sendStatus(500);
+    } else {
+      // We connected to the database!!!
+      // Now we're going to GET things from the db
+      console.log("task id is:", task.id);
+      var queryText = 'UPDATE "todo" SET "status" = $1' +
+                      ' WHERE id = $2;';
+      // errorMakingQuery is a bool, result is an object
+      db.query(queryText, [task.status, task.id], function(errorMakingQuery, result){
+        done();
+        if(errorMakingQuery) {
+          console.log('Attempted to query with', queryText);
+          console.log('Error making query');
+          res.sendStatus(500);
+        } else {
+          // console.log(result);
+          // Send back the results
+            res.sendStatus(200);
+        }
+      }); // end query
+    } // end if
+  }); // end pool
+});
 //
 // // http://localhost:5000/books/5
 // // ^ Delete book with the id of 5

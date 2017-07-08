@@ -8,7 +8,7 @@ FRIDAY
 [X] create click liteners
 
 SATURDAY MORNING
-[ ] createTask() -- insert to db and call refreshTasks
+[X] createTask() -- insert to db and call refreshTasks
 [ ] markComplete() -- change Class and update db
 [ ] deleteTask() -- delete from db and call refreshTasks
 

@@ -9,15 +9,21 @@ function appendToDom(tasks) {
   $('#taskList').empty();
   for(var i = 0; i < tasks.length; i+= 1) {
     var task = tasks[i];
-    var $tr = $('<tr></tr>');
+    var $tr = $('<tr data-taskid="' + task.id + '"></tr>');
     $tr.data('task', task);
-    $tr.append('<td>' + task.tasks + '</td>');
+    $tr.append('<td class="' + task.status + '">' + task.tasks + '</td>');
+    if(task.status == "complete") {
+      $tr.append('<p>Donezo!</p>');
+    }
+    else {
     $tr.append('<td><button class="mark ' + task.status + '">Mark Complete</button></td>');
+    }
     $tr.append('<td><button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
     $('#taskList').append($tr);
+  //  if task.status = complete {append check mark}
+  // else {append button}           ($('button[class]'))
   }
 }
-
 
 
 // OLD CODE
@@ -36,7 +42,7 @@ function addClickHandlers() {
   // Function called when delete button is clicked
   $('#taskList').on('click', '.deleteBtn', function(){
     // We attached the bookid as data on our button
-    var taskId = $(this).data('taskid');
+    var taskId = $(this).parent().parent().data('taskid');
     console.log($(this));
     console.log('Delete task with id of', taskId);
     // deleteTask(taskId); CREATE THIS SATURDAY
@@ -44,21 +50,19 @@ function addClickHandlers() {
 
   // Function called when edit button is clicked
   $('#taskList').on('click', '.mark', function(){
-    // Set editng to true, used when we submit the form
-    // editingBook = true;
-    // We attached the entire book object as data to our table row
-    // $(this).parent() is the <td>
-    // $(this).parent().parent() is the <tr> that we attached our data to
-    // var selectedBook = $(this).parent().parent().data('book');
-    // console.log(selectedBook);
-    // editingBookId = selectedBook.id;
-    console.log("complete clicked");
-    $(this).hide();
-    $(this).parent().parent().addClass('marked');
-
-    // Set the form values to the thing we're editing
-    // $('#author').val(selectedBook.author);
-    // $('#title').val(selectedBook.title);
+    // create deleivery object to go from client to server
+    var updatedTask = {};
+    // store task ID and status as properties in that object
+    updatedTask.id = $(this).parent().parent().data('taskid');
+    updatedTask.status = "complete";
+    // // update CSS to make task appear marked
+    // $(this).parent().parent().addClass('marked');
+    console.log("updatedTask", updatedTask);
+    // remove the Mark Done btn
+    // NOT EFFECTIVE TO HIDE BUTTON HERE BECAUSE markComplete will run refreshTasks which will run appendToDom
+    // $(this).hide();
+    // call markComplete for PUT request
+    markComplete(updatedTask);
   });
 } // end of click handlers
 
@@ -82,25 +86,26 @@ function refreshTasks() {
     url: '/tasks',
     success: function(response) {
       console.log("GET response", response.tasks);
+      // checking typeof response, confusion on array vs object response
       console.log("checking type", typeof response, typeof response.tasks, typeof response.tasks.tasks);
       appendToDom(response.tasks);
     }
   });
 }
-//
-// // UPDATE a.k.a. PUT
-// function updateBook(bookToUpdate) {
-//   // YOUR AJAX CODE HERE
-//   $.ajax({
-//     type: 'PUT',
-//     url: '/tasks',
-//     data: bookToUpdate,
-//     success: function(response) {
-//       console.log("Put response", response);
-//       refreshBooks();
-//     }
-//   });
-// }
+
+// UPDATE a.k.a. PUT
+function markComplete(task) {
+  $.ajax({
+    type: 'PUT',
+    url: '/tasks',
+    data: task,
+    success: function(response) {
+      console.log("Put response", response);
+      refreshTasks();
+    }
+  });
+}
+
 // // DELETE
 // function deleteBook(bookId) {
 //   // When using URL params, your url would be...
@@ -111,7 +116,7 @@ function refreshTasks() {
 //     url: '/tasks/' + bookId,
 //     success: function(response) {
 //       console.log("Delete response", response);
-//       refreshBooks();
+//       refreshTasks();
 //     }
 //   });
 //
