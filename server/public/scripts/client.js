@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
   console.log('jQuery sourced.');
-  // addClickHandlers();
+  addClickHandlers();
   refreshTasks();
 });
 
@@ -10,9 +10,10 @@ function appendToDom(tasks) {
   for(var i = 0; i < tasks.length; i+= 1) {
     var task = tasks[i];
     var $tr = $('<tr></tr>');
+    $tr.data('task', task);
     $tr.append('<td>' + task.tasks + '</td>');
-    $tr.append('<td><button class="' + task.completed + '">Mark Complete</button></td>');
-    $tr.append('<td><button>Delete</button></td>');
+    $tr.append('<td><button class="mark ' + task.status + '">Mark Complete</button></td>');
+    $tr.append('<td><button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
     $('#taskList').append($tr);
   }
 }
@@ -20,63 +21,60 @@ function appendToDom(tasks) {
 
 
 // OLD CODE
-// function addClickHandlers() {
-//   console.log('Listeners added.');
-//   // Function called when the submit button is clicked
-//   $('#addBtn').on('click', function(){
-//     console.log('Submit button clicked.');
-//     var book = {};
-//     book.author = $('#author').val();
-//     book.title = $('#title').val();
-//
-//     if(editingBook) {
-//       book.id = editingBookId;
-//       updateBook(book);
-//     } else {
-//       addBook(book);
-//     }
-//     $('input').val('');
-//   });
-//
-//   // Function called when delete button is clicked
-//   $('#bookShelf').on('click', '.deleteBtn', function(){
-//     // We attached the bookid as data on our button
-//     var bookId = $(this).data('bookid');
-//     console.log($(this));
-//     console.log('Delete book with id of', bookId);
-//     deleteBook(bookId);
-//   });
-//
-//   // Function called when edit button is clicked
-//   $('#bookShelf').on('click', '.editBtn', function(){
-//     // Set editng to true, used when we submit the form
-//     editingBook = true;
-//     // We attached the entire book object as data to our table row
-//     // $(this).parent() is the <td>
-//     // $(this).parent().parent() is the <tr> that we attached our data to
-//     var selectedBook = $(this).parent().parent().data('book');
-//     console.log(selectedBook);
-//     editingBookId = selectedBook.id;
-//
-//     // Set the form values to the thing we're editing
-//     $('#author').val(selectedBook.author);
-//     $('#title').val(selectedBook.title);
-//   });
-// } // end of click handlers
-//
-// // CREATE a.k.a. POST a.k.a. INSERT
-// function addBook(bookToAdd) {
-//   $.ajax({
-//     type: 'POST',
-//     url: '/tasks',
-//     data: bookToAdd,
-//     success: function(response) {
-//       console.log('Response from server.');
-//       refreshBooks();
-//     }
-//   });
-// }
-//
+function addClickHandlers() {
+  console.log('Listeners added.');
+  // Function called when the submit button is clicked
+  $('#addBtn').on('click', function(){
+    console.log('Add button clicked.');
+    var newTask = {};
+    newTask.task = $('#task').val();
+    newTask.status = 'incomplete';
+    addTask(newTask);
+    $('input').val('');
+  });
+
+  // Function called when delete button is clicked
+  $('#taskList').on('click', '.deleteBtn', function(){
+    // We attached the bookid as data on our button
+    var taskId = $(this).data('taskid');
+    console.log($(this));
+    console.log('Delete task with id of', taskId);
+    // deleteTask(taskId); CREATE THIS SATURDAY
+  });
+
+  // Function called when edit button is clicked
+  $('#taskList').on('click', '.mark', function(){
+    // Set editng to true, used when we submit the form
+    // editingBook = true;
+    // We attached the entire book object as data to our table row
+    // $(this).parent() is the <td>
+    // $(this).parent().parent() is the <tr> that we attached our data to
+    // var selectedBook = $(this).parent().parent().data('book');
+    // console.log(selectedBook);
+    // editingBookId = selectedBook.id;
+    console.log("complete clicked");
+    $(this).hide();
+    $(this).parent().parent().addClass('marked');
+
+    // Set the form values to the thing we're editing
+    // $('#author').val(selectedBook.author);
+    // $('#title').val(selectedBook.title);
+  });
+} // end of click handlers
+
+// CREATE a.k.a. POST a.k.a. INSERT
+function addTask(taskToAdd) {
+  $.ajax({
+    type: 'POST',
+    url: '/tasks',
+    data: taskToAdd,
+    success: function(response) {
+      console.log('Response from server.');
+      refreshTasks();
+    }
+  });
+}
+
 // READ a.k.a. GET a.k.a. SELECT
 function refreshTasks() {
   $.ajax({
