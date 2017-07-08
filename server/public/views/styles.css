@@ -27,7 +27,7 @@ html, body
 
 #task {
   position:absolute;
-  top:343px;
+  top:323px;
   left:303px;
   /*right:0;
   bottom:0;*/
@@ -35,7 +35,7 @@ html, body
   z-index: 50;
   width: 212px;
   /*height: 500px;*/
-  height: 26px;
+  height: 46px;
   text-align: center;
 }
 
@@ -55,13 +55,13 @@ h3 {
   position:absolute;
   top:48px;
   left:303px;
-  margin:auto;
+  margin: auto;
   z-index: 50;
   width: 218px;
   height: 26px;
   text-align: center;
   color: orange;
-  padding: 3px 0px;
+  padding: 15px 0 0 0;
   background-color: gray;
   border-radius: 2px;
 }
@@ -69,23 +69,26 @@ h3 {
 /*TABLE STYLING*/
 table {
   position:absolute;
-  top:48px;
+  top:90px;
   left:303px;
   margin:auto;
   z-index: 50;
   width: 218px;
   /*height: 360px;*/
-  background-color: blue;
+  background-color: orange;
   border-radius: 5px;
   color: black;
   z-index: 1;
   /*overflow: scroll;*/
   /*align-items: center;*/
 }
-/*
+
 tr, td {
-  height: 75px;
-}*/
+  height: 20px;
+  width: 100%;
+  vertical-align: middle;
+  border-bottom: 1px black solid;
+}
 
 /*td:nth-of-type(1) {
   width: 212px;
@@ -100,22 +103,29 @@ td:nth-of-type(2) {
 }*/
 
 /*BUTTON STYLING*/
-/*.mark {
-  font-size: 5px;
-  height: 10px;
-  width: 10px;
+button {
+  font-size: 10px;
+  height: 15px;
+  width: 50px;
   z-index: 100;
+  /*not sure why button text smooshes to bottom unless I use this padding..*/
+  padding: 0 0 10px 0;
+  border-radius: 15px;
+}
+
+.mark {
+  background-color: darkGreen;
 }
 
 .deleteBtn {
-  font-size: 5px;
-  height: 10px;
-  width: 10px;
-  z-index: 100;
-}*/
+background-color: darkRed;
+}
 
 /* TASKS STYLING*/
 .complete {
-  color: blue;
-  background-color: orange;
+  color: black;
+  background-color: gray;
+  opacity: 0.75;
+  border-radius: 5px;
+  width: 100%;
 }
