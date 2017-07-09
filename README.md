@@ -26,7 +26,7 @@ SATURDAY AFTERNOON
   [X] update marked complete css styling -- remove button, gray background and slight opacity
   [X] why isn't delete working right away?
 [ ] create an 'are you sure: yes / no' option when deleting a task.
-[ ] ADD JQUERY UI SCRIPT
+<!-- [ ] ADD JQUERY UI SCRIPT -->
 [ ] figure out scrollbox for tasks
 [X] if empty input throw alert
 [X] Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
@@ -40,9 +40,16 @@ LESSONS
   * learning about CRUD and how to seperate functions
   * Not effective to update CSS in markComplete click listener because that triggers Put request --> Get request --> refresh appendToDom
   * careful setting height for table, produced strange results where rows kept filling all available space
+  * In future want to try refactoring this to use <ul>and<li> instead of table -- simialr to JS/jQuery book -- curious about how appending and styling would change
+    * Interesting how much of this is learning about what properties/methods/frameworks that already exist and then applying it to my current problem -- steep syntax learning curve, and then lots of exploration and iteration
+  * CSS styling still feels like flailing, I want to keep building a base knowledge so that I can plan more, and practice returning to that plan when I fall down CSS rabbit holes.
 
   QUESTIONS
     * What is "ERROR:  duplicate key value violates unique constraint "id" in postico? And then if I execute the command several times it will insert
+    * got stuck trying to add jquery-ui dialog so just used alert instead. Lots of questions about how to use dialog correctly
+      RELATED THINGS TO REVIEW: https://jqueryui.com/dialog/
+      https://stackoverflow.com/questions/887029/how-to-implement-confirmation-dialog-in-jquery-ui-dialog
+      https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
 
 
 

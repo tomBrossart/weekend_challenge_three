@@ -10,36 +10,39 @@ function appendToDom(tasks) {
   for(var i = 0; i < tasks.length; i+= 1) {
     var task = tasks[i];
     var $tr = $('<tr data-taskid="' + task.id + '"></tr>');
-    $tr.data('task', task);
+    // $tr.data('task', task);
     $tr.append('<td class="task ' + task.status + '">' + task.tasks + '</td>');
-    // if task is already complete just add Delete
+    // if task is already complete just add Delete button
     if(task.status == "complete") {
       $tr.append('<td><button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
       $('#taskList').append($tr);
-       }
+    }
     // otherwise add Done and Delete button
     else {
-    $tr.append('<td><button class="mark ' + task.status + '">Done</button>' +
-                '<button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
+      $tr.append('<td><button class="mark ' + task.status + '">Done</button>' +
+      '<button class= "deleteBtn" data-taskid="'+ task.id +'">Delete</button></td>');
+      //  incomplete tasks go to top of table
       $('#taskList').prepend($tr);
-          }
+    }
   }
 }
 
+// this function listens for clicks on btns: add, delete, and done
 function addClickHandlers() {
   console.log('Listeners added.');
-  // Function called when the submit button is clicked
+  // Function called when the add button is clicked
   $('#addBtn').on('click', function(){
     console.log('Add button clicked.');
     var newTask = {};
     newTask.task = $('#task').val();
     newTask.status = 'incomplete';
+    // make sure there is input to add to database
     if(newTask.task === '') {
       alert("Please enter a task to add!");
     }
     else{
-    addTask(newTask);
-    $('input').val('');
+      addTask(newTask);
+      $('input').val('');
     }
   });
 
@@ -49,8 +52,13 @@ function addClickHandlers() {
     var taskId = $(this).parent().parent().data('taskid');
     console.log($(this));
     console.log('Delete task with id of', taskId);
-    // NOT WORKING CORRECTLY __ FIX ON SUNDAY
-    ConfirmDialog('Are you sure you want to delete this task?');
+    // verify user intent to delete
+    if (confirm("Are you sure you want to delete this task?")) {
+    deleteTask(taskId);
+    }
+    else { }
+    // NOT WORKING CORRECTLY -- to be refactored in future
+    // ConfirmDialog('Are you sure you want to delete this task?');
   });
 
   // Function called when edit button is clicked
@@ -121,26 +129,28 @@ function deleteTask(taskId) {
   });
 }
 
-// FIX THIS ON SUNDAY -- NEED TO ADD JQUERY UI SCRIPT
+// COMMENTED OUT BECAUSE COULDN'T GET TO WORK
 //confirm if user wants to delete task
-function ConfirmDialog(message) {
-  $('<div></div>').appendTo('body').html('<div><h6>' + message + '?</h6></div>')
-                            .dialog({
-                              modal: true, title: 'Delete message', zIndex: 10000,
-                              autoOpen: true,
-                              width: 'auto',
-                              resizable: false,
-                              buttons: {
-                                Yes: function() {
-                                  // this might be a scope issue with taskId
-                                  deleteTask(taskId);
-                                },
-                                No: function() {
-                                  $(this).dialog("close");
-                                }
-                              },
-                              close: function (event, ui) {
-                                $(this).remove();
-                              }
-                            }); //end of dialog
-} // end of ConfirmDialog
+// function ConfirmDialog(message) {
+//   $('<div id="dialog"></div>').appendTo('body').html('<div id="dialog"><h6>' + message + '?</h6></div>')
+//   .dialog({
+//     modal: true, title: 'Delete message',
+//     zIndex: 99999,
+//     autoOpen: true,
+//     width: 300,
+//     height: 'auto',
+//     resizable: false,
+//     buttons: {
+//       Yes: function() {
+//         // this might be a scope issue with taskId
+//         deleteTask(taskId);
+//       },
+//       No: function() {
+//         $(this).dialog("close");
+//       }
+//     },
+//     close: function (event, ui) {
+//       $(this).remove();
+//     }
+//   }); //end of dialog
+// } // end of ConfirmDialog
