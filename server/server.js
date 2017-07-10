@@ -16,6 +16,7 @@ app.get('/*', function(req, res) {
   var file = req.params[0] || '/views/index.html';
   res.sendFile(path.join(__dirname, '/public/', file));
 });
+// same as ^^^ app.use(express.static('server/public'))
 
 // Start listening for requests on a specific port
 app.listen(port, function(){

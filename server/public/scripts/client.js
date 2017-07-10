@@ -42,7 +42,6 @@ function addClickHandlers() {
     }
     else{
       addTask(newTask);
-      $('input').val('');
     }
   });
 
@@ -83,6 +82,7 @@ function addTask(taskToAdd) {
     success: function(response) {
       console.log('Response from server.');
       refreshTasks();
+      $('input').val('');
     }
   });
 }

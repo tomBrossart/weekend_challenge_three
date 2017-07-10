@@ -15,23 +15,30 @@ SATURDAY MORNING
 
 
 SATURDAY AFTERNOON
-[ ] implement CSS
+[X] implement CSS
   [X] find iphone outline to append items inside of
   [X] get outline centered on screen
-  [ ] find illustration for checkmark and trashcan
   [X] absolute position app header
   [X] absolute position "Add Task" btn and input field at bottom
   [X] format table to display rows full width with same color background
   [X] get buttons in same TD
   [X] update marked complete css styling -- remove button, gray background and slight opacity
   [X] why isn't delete working right away?
-[ ] create an 'are you sure: yes / no' option when deleting a task.
+[X] create an 'are you sure: yes / no' option when deleting a task.
 <!-- [ ] ADD JQUERY UI SCRIPT -->
-[ ] figure out scrollbox for tasks
 [X] if empty input throw alert
 [X] Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
   ** going to sort by class
   ** client side logic...
+REFACTOR WHEN TIME
+[ ] change "status" in db to boolean type
+[ ] install bootstrap and jQuery UI
+[ ] use modal for confirm delete and "no input" alert
+[ ] find illustration for checkmark and trashcan
+[ ] figure out scrollbox for tasks
+[ ] change marked done button to radio selection
+
+
 
 
 

@@ -17,7 +17,7 @@ router.get('/', function(req, res){
   // done is a function that we call when we're done
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
-      console.log('Error connecting to the database.');
+      console.log('Error connecting to the database.', errorConnectingToDatabase);
       res.sendStatus(500);
     } else {
       var queryText = 'SELECT * FROM "todo";';
@@ -25,7 +25,7 @@ router.get('/', function(req, res){
         done();
         if(errorMakingQuery) {
           console.log('Attempted to query with', queryText);
-          console.log('Error making query');
+          console.log('Error making query', errorMakingQuery);
           res.sendStatus(500);
         } else {
           // Send back the results
@@ -43,7 +43,7 @@ router.post('/', function(req, res) {
   // PASTED PG CODE
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
-      console.log('Error connecting to the database.');
+      console.log('Error connecting to the database.', errorConnectingToDatabase);
       res.sendStatus(500);
     } else {
       var queryText = 'INSERT INTO "todo" ("tasks", "status")' +
@@ -52,7 +52,7 @@ router.post('/', function(req, res) {
         done();
         if(errorMakingQuery) {
           console.log('Attempted to query with', queryText);
-          console.log('Error making query');
+          console.log('Error making query', errorMakingQuery);
           res.sendStatus(500);
         } else {
           // Send back the results
@@ -71,7 +71,7 @@ router.put('/', function(req, res){
   // YOUR CODE HERE
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
-      console.log('Error connecting to the database.');
+      console.log('Error connecting to the database.', errorConnectingToDatabase);
       res.sendStatus(500);
     } else {
       // We connected to the database!!!
@@ -84,7 +84,7 @@ router.put('/', function(req, res){
         done();
         if(errorMakingQuery) {
           console.log('Attempted to query with', queryText);
-          console.log('Error making query');
+          console.log('Error making query', errorMakingQuery);
           res.sendStatus(500);
         } else {
           // console.log(result);
@@ -104,7 +104,7 @@ router.delete('/:id', function(req, res){
   console.log('Delete route called with id of', id);
   pool.connect(function(errorConnectingToDatabase, db, done){
     if(errorConnectingToDatabase) {
-      console.log('Error connecting to the database.');
+      console.log('Error connecting to the database.', errorConnectingToDatabase);
       res.sendStatus(500);
     } else {
       console.log("task id is:", id);
@@ -114,7 +114,7 @@ router.delete('/:id', function(req, res){
         done();
         if(errorMakingQuery) {
           console.log('Attempted to query with', queryText);
-          console.log('Error making query');
+          console.log('Error making query', errorMakingQuery);
           res.sendStatus(500);
         } else {
           // console.log(result);
@@ -124,7 +124,6 @@ router.delete('/:id', function(req, res){
       }); // end query
     } // end if
   }); // end pool
-
 });
 
 module.exports = router;
