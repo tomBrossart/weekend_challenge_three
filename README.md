@@ -1,11 +1,14 @@
+# Overview 
+First time creating a 'TO DO' application. Great solo practice for understanding how req/res moves through the full stack.
+
 # weekend_challenge_three
 
 FRIDAY
-[X] inital files/folder setup and logging
-[X] verify db connection --
-[X] sketch basic visual
-[X] psuedo code logic
-[X] create click liteners
+- [X] inital files/folder setup and logging
+- [X] verify db connection --
+- [X] sketch basic visual
+- [X] psuedo code logic
+- [X] create click liteners
 
 SATURDAY MORNING
 [X] createTask() -- insert to db and call refreshTasks
